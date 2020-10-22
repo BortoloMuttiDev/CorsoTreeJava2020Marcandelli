@@ -1,56 +1,50 @@
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Labyrinth {
+public class MyLabyrinth {
 
 
     public static void main(String[] args) {
-        char[][] lab = createLab();
+
+        Scanner m = new Scanner(System.in);
+
+
+        char[][] lab = new char[5][5];
+        for (int i = 0; i < lab.length; i++)
+            for (int j = 0; j < lab[0].length; j++)
+                lab[i][j] = '-';
+        lab[0][2] = 'W';
+        lab[0][3] = 'W';
+        lab[1][1] = 'W';
+        lab[1][3] = 'W';
+        lab[2][0] = 'P';
+        lab[2][1] = 'W';
+        lab[2][3] = 'W';
+        lab[2][4] = 'W';
+        lab[3][2] = 'W';
+        lab[3][4] = 'E';
+        lab[4][0] = 'W';
+        lab[4][4] = 'W';
+
+
+
        printArray2D(lab);
 
-        int [] position = findPlayer(lab);
-
-        move(position,lab);
-        printArray2D(lab);
-
-        move(position,lab);
-        printArray2D(lab);
-
-        move(position,lab);
-        printArray2D(lab);
-
-        move(position,lab);
-
-        printArray2D(lab);
-
+        while (true){
+            char mossa = m.next().toUpperCase().charAt(0);
+            move(lab,mossa);
+            printArray2D(lab);
+            if(checkPlayerWin(lab))
+                break;
+        }
+        System.out.println("GG EZ");
 
     }
 
-    public static char[][] createLab() {
 
-        char[][] labyrinth = new char[5][5];
-        for (int i = 0; i < labyrinth.length; i++)
-            for (int j = 0; j < labyrinth[0].length; j++)
-                labyrinth[i][j] = '-';
-        labyrinth[0][2] = 'W';
-        labyrinth[0][3] = 'W';
-        labyrinth[1][1] = 'W';
-        labyrinth[1][3] = 'W';
-        labyrinth[2][0] = 'P';
-        labyrinth[2][1] = 'W';
-        labyrinth[2][3] = 'W';
-        labyrinth[2][4] = 'W';
-        labyrinth[3][2] = 'W';
-        labyrinth[3][4] = 'E';
-        labyrinth[4][0] = 'W';
-        labyrinth[4][4] = 'W';
-
-        return labyrinth;
-    }
 
     public static void printArray2D(char[][] arrayInt) {
         for (int i = 0; i < arrayInt.length; i++) {
-            //System.out.print("[");
             for (int j = 0; j < arrayInt[0].length; j++) {
                 System.out.print(arrayInt[i][j]);
                 if (j != arrayInt[0].length - 1) System.out.print("  ");
@@ -68,39 +62,42 @@ public class Labyrinth {
                 if (lab[row][col] == 'P') {
                     posizione[0] = row;
                     posizione[1] = col;
+                    break;
                 }
             }
         }
         return posizione;
     }
 
-    public static void move(int posizione[],char[][] lab) {
+    public static void move(char[][] lab, char move) {
 
 
-        Scanner m = new Scanner(System.in);
-        char move = m.next().charAt(0);
+
 
         switch (move) {
 
             case 'W':
-             checkCellaUp(posizione,lab);
+             checkCellaUp(lab);
              break;
 
             case 'D':
-                checkCellaRight(posizione,lab);
+                checkCellaRight(lab);
             break;
+
             case 'S':
-               checkCellaDown(posizione,lab);
+               checkCellaDown(lab);
             break;
+
             case 'A':
-               checkCellaLeft(posizione,lab);
+               checkCellaLeft(lab);
                break;
         }
 
     }
 
 
-    public static char [] [] checkCellaUp(int[] posizione, char[][] lab) {
+    public static char [] [] checkCellaUp(char[][] lab) {
+        int[] posizione = findPlayer(lab);
         int rowp = posizione[0];
         int colp = posizione[1];
 
@@ -117,14 +114,15 @@ public class Labyrinth {
         return lab;
 
     }
-    public static char [] [] checkCellaRight(int[] posizione, char[][] lab) {
+    public static char [] [] checkCellaRight(char[][] lab) {
+        int[] posizione = findPlayer(lab);
         int rowp = posizione[0];
         int colp = posizione[1];
 
-        if (colp + 1 > lab.length || lab[rowp][colp + 1] == 'W'){
+        if (colp + 1 >= lab[0].length || lab[rowp][colp + 1] == 'W'){
             System.out.println("You cannot move outside boundaries");
         return lab;
-    }
+    }else
 
             lab[rowp][colp+1] = 'P';
         lab[rowp][colp] = '-';
@@ -134,14 +132,15 @@ public class Labyrinth {
         return lab;
 
     }
-    public static char [] [] checkCellaDown(int[] posizione, char[][] lab) {
+    public static char [] [] checkCellaDown(char[][] lab) {
+        int[] posizione = findPlayer(lab);
         int rowp = posizione[0];
         int colp = posizione[1];
 
-        if (rowp + 1 < lab.length || lab[rowp + 1][colp] == 'W') {
+        if (rowp + 1 >= lab.length || lab[rowp + 1][colp] == 'W') {
             System.out.println("You cannot move outside boundaries");
             return lab;
-        }
+        }else
             lab[rowp+1][colp] = 'P';
         lab[rowp][colp] = '-';
 
@@ -150,14 +149,15 @@ public class Labyrinth {
         return lab;
 
     }
-    public static char [] [] checkCellaLeft(int[] posizione, char[][] lab) {
+    public static char [] [] checkCellaLeft(char[][] lab) {
+        int[] posizione = findPlayer(lab);
         int rowp = posizione[0];
         int colp = posizione[1];
 
         if (colp - 1 < 0 || lab[rowp][colp - 1] == 'W'){
             System.out.println("You cannot move outside boundaries");
         return lab;
-    }
+    }else
             lab[rowp][colp-1] = 'P';
         lab[rowp][colp] = '-';
 
@@ -165,5 +165,13 @@ public class Labyrinth {
 
         return lab;
 
+    }
+
+    public static boolean checkPlayerWin(char[][] lab) {
+        for (int i = 0; i < lab.length; i++)
+            for (int j = 0; j < lab[0].length; j++)
+                if (lab[i][j] == 'E')
+                    return false;
+        return true;
     }
 }
