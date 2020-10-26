@@ -36,6 +36,10 @@ public class MyLabyrinth {
             printArray2D(lab);
             if(checkPlayerWin(lab))
                 break;
+
+
+
+
         }
         System.out.println("GG EZ");
 

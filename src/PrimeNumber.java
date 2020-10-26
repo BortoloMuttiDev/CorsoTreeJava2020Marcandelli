@@ -1,4 +1,3 @@
-package module_03;
 
 public class PrimeNumber {
     public static void main(String[] args) {
