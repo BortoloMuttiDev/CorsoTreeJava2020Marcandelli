@@ -39,7 +39,7 @@ public class NumeroRomano<T> {
         return 0;
     }
 
-   public int getIntero() {
+   public int getValore() {
         char[] numeri = numero.toCharArray();
         int res = 0;
 
@@ -50,11 +50,18 @@ public class NumeroRomano<T> {
             if (i + 1 < numeri.length) {
                 int second = romanToDecimal(numeri[i+1]);
 
+
+
                 if(first>=second){
-                    res =res+first+second;
-                    i++;
+                    if(romanToDecimal(numeri[i+2])>second && romanToDecimal(numeri[i+2])<numeri.length){
+                        res = res+first;
+                    } else {
+                        res = res + first + second;
+                        i++;
+                    }
+
                 }
-                else if (second<first) {
+                else if (second>first) {
                     res = res + (second - first);
                     i++;
                 }

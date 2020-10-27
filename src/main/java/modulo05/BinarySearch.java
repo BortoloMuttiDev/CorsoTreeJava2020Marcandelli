@@ -1,6 +1,7 @@
+package modulo05;
 
 public class BinarySearch {
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         int[] values = new int[7];
         values[0] = 1;
         values[1] = 2;
@@ -20,13 +21,13 @@ public class BinarySearch {
         values[5] = 98;
         index = binarySearch(values, 98);
         System.out.println(index);
-    }
+    }*/
 
-    public static int binarySearch(int[] values, int n) {
+    public  int binarySearch(int[] values, int n) {
         return binarySearchRecursive(values, 0, values.length-1, n);
     }
 
-    private static int binarySearchRecursive(int[] values, int begin, int end, int n) {
+    private  int binarySearchRecursive(int[] values, int begin, int end, int n) {
         if(values[(begin+end)/2] == n)
             return (begin+end)/2;
         if(begin>=end) //not found
