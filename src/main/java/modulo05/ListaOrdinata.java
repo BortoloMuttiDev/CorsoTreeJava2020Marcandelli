@@ -1,25 +1,23 @@
 package modulo05;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class ListaOrdinata {
 
     private int[] values;
     private int[] nuovoArray;
     private int[] array;
+    private int count;
 
-    public ListaOrdinata(int[] values) {
+     public ListaOrdinata(int[] values) {
         this.values = values;
+        this.count = values.length-1;
     }
 
     public int[] insert(int x) {
 
+
         int[] array = verificaArray(values);
-
         for (int i = 0; i < values.length+1; i++) {
-
 
             if (x < array[i]) {
                int y = array[i];
@@ -27,10 +25,8 @@ public class ListaOrdinata {
                 x=y;
             }
 
-
-
         }
-
+        count++;
 return array;
     }
 
@@ -41,6 +37,7 @@ return array;
 
 
     }
+
 
     public int[] remove(int[] values,int x) {
 
@@ -60,23 +57,25 @@ return array;
         }
         return nuovoArray;
     }
-    public int[] verificaArray(int[] values) {
 
+
+    public int[] verificaArray(int[] values) {
+        if (count==values.length-1){
         int index = values.length*2;
         for (int i = 0; i < index; i++) {
             if (i == index - 1) {
                 int[] nuovoArray = new int[index];
 
                 for (int j = 0; j < index; j++) {
-                    if(j<values.length) {
+                    if (j < values.length) {
                         nuovoArray[j] = values[j];
-                    }else  {
-                        nuovoArray[j]= Integer.MAX_VALUE;
+                    } else {
+                        nuovoArray[j] = Integer.MAX_VALUE;
                     }
                 }
                 return nuovoArray;
             }
-
+        }
         }
 
         return values;

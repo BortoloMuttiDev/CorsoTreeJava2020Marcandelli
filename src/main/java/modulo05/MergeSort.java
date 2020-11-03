@@ -21,7 +21,7 @@ public class MergeSort {
         mergeSort(array);
     }
 */
-    public int[] mergeSort(int[] arr){
+    public static int[] mergeSort(int[] arr){
         //Se l'array ha un solo elemento è gia ordinato
         if(arr.length == 1){
             return arr;
@@ -34,7 +34,7 @@ public class MergeSort {
         return unisciArray(arrayDestro, arraySinistro);
     }
 
-    public int[] dividiArray(int[] a, int inizio, int fine){
+    public static int[] dividiArray(int[] a, int inizio, int fine){
         int[] nuovoArray = new int[fine - inizio];
 
         for(int i=0; i<nuovoArray.length; i++){
@@ -44,7 +44,7 @@ public class MergeSort {
         return nuovoArray;
     }
 
-    public int[] unisciArray(int[] a1, int[] a2){
+    public static int[] unisciArray(int[] a1, int[] a2){
         int[] arrayUnito = new int[a1.length + a2.length];
         int i=0;
         int j=0;

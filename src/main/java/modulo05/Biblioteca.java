@@ -10,8 +10,8 @@ public class Biblioteca {
 
 
     public Biblioteca(int[] values){
-        MergeSort mrg = new MergeSort();
-        this.values=mrg.mergeSort(values);
+
+        this.values = MergeSort.mergeSort(values);
     }
 
     public boolean esisteLibro(int index){

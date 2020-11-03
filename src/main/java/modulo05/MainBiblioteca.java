@@ -28,7 +28,9 @@ public class MainBiblioteca {
         OrdinamentoRicorsivo ord = new OrdinamentoRicorsivo(values);
         ord.getMinMax();*/
           ListaOrdinata lst = new ListaOrdinata(values);
-            int[] valori = lst.insert(4);
+        System.out.println(Arrays.toString(values));
+        int[] valori = lst.insert(4);
+            System.out.println(Arrays.toString(valori));
          System.out.println( lst.indexOf(valori, 4));
         System.out.println(Arrays.toString(lst.remove(valori,4)));
 
